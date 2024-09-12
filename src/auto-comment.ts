@@ -50,15 +50,15 @@ export default async function () {
         console.log(`Membuka link postingan... berhasil\n`)
         await delay(1500)
 
-        if (await page.$('#login_popup_cta_form') !== null) {
-            console.log(`Akun facebook untuk profile ${profile.name} telah logout/cookie hilang`)
-            await browser.close();
-            await delay(5500);
-            continue;
-        }
+        // if (await page.$('#login_popup_cta_form') !== null) {
+        //     console.log(`Akun facebook untuk profile ${profile.name} telah logout/cookie hilang`)
+        //     await browser.close();
+        //     await delay(5500);
+        //     continue;
+        // }
 
         try {
-            const commentInput = await page.waitForSelector('div[data-lexical-editor="true"][role="textbox"][spellcheck="true"]');
+            const commentInput = await page.waitForSelector('textarea[autocomplete="off"]');
 
             await commentInput?.tap();
             await commentInput?.focus();
@@ -66,6 +66,15 @@ export default async function () {
 
             await delay(1500);
             await commentInput?.press('Enter');
+
+            const loading = await page.$('div[data-visualcompletion="loading-state"]');
+            await delay(1000)
+
+            while (loading !== null) {
+                await delay(100)
+                // do nothing
+            }
+
             await commentInput?.dispose();
         } catch (e: any) {
             console.error(`Gagal memberikan komentar pada profil \`${profile}\``, `\`${e.message}\``)
