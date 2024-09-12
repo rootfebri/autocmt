@@ -1,5 +1,5 @@
 import {select} from "@inquirer/prompts";
-import {setupLogin} from "./setup";
+import setupLogin from "./setup";
 import AutoComment from "./auto-comment";
 
 const main = async () => {
@@ -12,8 +12,7 @@ const main = async () => {
             ],
         });
 
-        await answer();
-        console.log("Operation completed successfully.");
+        await answer().finally(() => console.log("Operation completed successfully."));
     } catch (error) {
         console.error("An error occurred in main:", error);
     } finally {

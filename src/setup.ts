@@ -1,9 +1,9 @@
-import {input} from "@inquirer/prompts";
+import {confirm, input} from "@inquirer/prompts";
 import {CHROME_DIR, isProfileExists} from "./lib";
 import {chromeLaunch} from "./launcher";
 import path from "path";
 
-export const setupLogin = async () => {
+export default async function () {
     const profileName = await input({
         required: true,
         message: 'Masukkan nama profile chrome',
@@ -14,5 +14,9 @@ export const setupLogin = async () => {
 
     const browser = await chromeLaunch(path.join(CHROME_DIR, profileName));
     const [page] = await browser.pages();
-    await page.goto('https://facebook.com')
+    await page.goto('https://facebook.com');
+
+    while (!await confirm({message: 'Enter jika sudah selesai'})) {}
+
+    await browser.close()
 }
