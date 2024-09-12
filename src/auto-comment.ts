@@ -67,7 +67,6 @@ export default async function () {
             await delay(1500);
             await commentInput?.press('Enter');
             await commentInput?.dispose();
-
         } catch (e: any) {
             console.error(`Gagal memberikan komentar pada profil \`${profile}\``, `\`${e.message}\``)
         }
