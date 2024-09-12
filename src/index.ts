@@ -1,5 +1,5 @@
-import { select } from "@inquirer/prompts";
-import { setupLogin } from "./setup";
+import {select} from "@inquirer/prompts";
+import {setupLogin} from "./setup";
 import AutoComment from "./auto-comment";
 
 const main = async () => {
@@ -7,8 +7,8 @@ const main = async () => {
         const answer = await select({
             message: 'Pilih aksi',
             choices: [
-                { name: 'Jalankan Bot Auto Comment', value: AutoComment },
-                { name: 'Buat Profil Chrome baru', value: setupLogin },
+                {name: 'Jalankan Bot Auto Comment', value: AutoComment},
+                {name: 'Buat Profil Chrome baru', value: setupLogin},
             ],
         });
 
