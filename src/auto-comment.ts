@@ -62,7 +62,7 @@ export default async function () {
 
             const loading = await page.$('div[data-visualcompletion="loading-state"]');
             await delay(1000)
-            let maxTry: number = 30
+            let maxTry: number = 100
 
             while (loading !== null || maxTry > 1) {
                 await delay(100)
