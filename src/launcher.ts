@@ -1,7 +1,6 @@
 import {Browser, executablePath} from "puppeteer";
 import StealthPlugin from "puppeteer-extra-plugin-stealth";
 import puppeteer from "puppeteer-extra";
-import {CHROME_DIR} from "./lib";
 
 export const chromeLaunch = async (profile: string): Promise<Browser> => {
     const stealth = StealthPlugin()
@@ -19,7 +18,7 @@ export const chromeLaunch = async (profile: string): Promise<Browser> => {
     }));
 
     return await puppeteer.launch({
-        userDataDir: `${CHROME_DIR}/${profile}`,
+        userDataDir: profile,
         headless: false,
         executablePath: executablePath('chrome'),
         devtools: false,
@@ -36,5 +35,5 @@ export const chromeLaunch = async (profile: string): Promise<Browser> => {
             "--proxy-server='direct://'",
             "--proxy-bypass-list=*"
         ]
-    })
+    });
 }

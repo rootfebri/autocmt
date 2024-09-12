@@ -1,0 +1,25 @@
+{
+    "name": "autocmt",
+    "version": "1.0.0",
+    "description": "",
+    "main": "dist/index.js",
+    "scripts": {
+        "start": "bun run src/index.ts"
+    },
+    "dependencies": {
+        "@inquirer/prompts": "^5.5.0",
+        "delay": "^6.0.0",
+        "inquirer": "^10.2.2",
+        "inquirer-file-selector": "^0.4.0",
+        "puppeteer": "^23.3.0",
+        "puppeteer-extra": "^3.3.6",
+        "puppeteer-extra-plugin-adblocker": "^2.13.6",
+        "puppeteer-extra-plugin-stealth": "^2.11.2",
+        "puppeteer-extra-plugin-user-preferences": "^2.4.1"
+    },
+    "devDependencies": {
+        "esbuild": "^0.23.1",
+        "typescript": "^5.5.3"
+    },
+    "private": true
+}
