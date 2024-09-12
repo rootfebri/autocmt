@@ -64,7 +64,7 @@ export default async function () {
             await delay(1000)
             let maxTry: number = 100
 
-            while (loading !== null || maxTry > 1) {
+            while (loading !== null && maxTry > 1) {
                 await delay(100)
                 maxTry--
             }
