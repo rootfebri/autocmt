@@ -50,13 +50,6 @@ export default async function () {
         console.log(`Membuka link postingan... berhasil\n`)
         await delay(1500)
 
-        // if (await page.$('#login_popup_cta_form') !== null) {
-        //     console.log(`Akun facebook untuk profile ${profile.name} telah logout/cookie hilang`)
-        //     await browser.close();
-        //     await delay(5500);
-        //     continue;
-        // }
-
         try {
             const commentInput = await page.waitForSelector('textarea[autocomplete="off"]');
 
@@ -69,10 +62,11 @@ export default async function () {
 
             const loading = await page.$('div[data-visualcompletion="loading-state"]');
             await delay(1000)
+            let maxTry: number = 30
 
-            while (loading !== null) {
+            while (loading !== null || maxTry > 1) {
                 await delay(100)
-                // do nothing
+                maxTry--
             }
 
             await commentInput?.dispose();
