@@ -5,6 +5,7 @@ import deleteProfile from "./delete-profile";
 import fs from "fs";
 import {CHROME_DIR} from "./lib";
 import listProfile from "./list-profile";
+import autoPostTwitter from "./auto-post-twitter";
 
 const main = async () => {
     if (! fs.existsSync(CHROME_DIR)) {
@@ -18,6 +19,7 @@ const main = async () => {
                 {name: 'Buat Profil Chrome baru', value: setupLogin},
                 {name: 'Lihat semua profil chrome', value: listProfile},
                 {name: 'Hapus profil chrome', value: deleteProfile},
+                {name: 'Auto Tweet', value: autoPostTwitter},
             ],
         });
 

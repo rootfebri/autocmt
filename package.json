@@ -8,9 +8,13 @@
     },
     "dependencies": {
         "@inquirer/prompts": "^5.5.0",
+        "@types/inquirer": "^9.0.7",
+        "@types/inquirer-fuzzy-path": "^2.3.9",
         "delay": "^6.0.0",
         "inquirer": "^10.2.2",
         "inquirer-file-selector": "^0.4.0",
+        "inquirer-file-tree-selection-prompt": "^2.0.5",
+        "inquirer-fuzzy-path": "^2.3.0",
         "puppeteer": "^23.3.0",
         "puppeteer-extra": "^3.3.6",
         "puppeteer-extra-plugin-adblocker": "^2.13.6",

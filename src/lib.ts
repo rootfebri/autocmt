@@ -42,3 +42,7 @@ export const getRandomComment = (file: string): Promise<string> => {
         });
     });
 };
+
+export const selectRandom = (input: string[]): string => {
+    return input[Math.floor(Math.random() * input.length)];
+}

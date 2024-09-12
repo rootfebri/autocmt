@@ -6,7 +6,7 @@ export default async function () {
         console.error(`Tidak ada profil disini.`)
     } else {
         for (const profile of profiles) {
-            console.info(profile, '\n');
+            console.info(profile.name, '\n');
         }
     }
 }
