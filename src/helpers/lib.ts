@@ -2,8 +2,6 @@ import path from "path";
 import fs from "fs";
 import Profile from "../../models/profile";
 import {FProfile} from "./libs";
-import type { PartialDeep } from '@inquirer/type';
-import { type Theme } from '@inquirer/core';
 import chalk from "chalk";
 
 export const CHROME_DIR: string = path.join(__dirname, `../chrome/userData`)
