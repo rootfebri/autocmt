@@ -1,3 +1,11 @@
 import main from "./main";
 
-main().catch(console.error)
+(async () => {
+    while (true) {
+        try {
+            await main()
+        } catch (error) {
+            console.error("An error occurred in main:", error);
+        }
+    }
+})()

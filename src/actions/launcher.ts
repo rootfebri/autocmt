@@ -30,6 +30,7 @@ export default async (profile: string, headless: boolean = false): Promise<Brows
             '--disable-accelerated-2d-canvas',
             '--disable-dev-shm-usage',
             "--proxy-server='direct://'",
+            "--proxy-bypass-list=*",
         ]
     });
 }
