@@ -8,6 +8,7 @@ import twitter from "./task/twitter";
 import instagram from "./task/instagram";
 import facebook from "./task/facebook";
 import createProfile from "./actions/create-profile";
+import openProfile from "./actions/open-profile";
 
 const ensureChrome = () => {
     if (!fs.existsSync(CHROME_DIR)) {
@@ -51,7 +52,7 @@ export default async () => {
                                 value: createProfile
                             }, {
                                 name: 'Buka profil chrome',
-                                value: listProfile
+                                value: openProfile
                             }, {
                                 name: 'Daftar Profil',
                                 value: listProfile

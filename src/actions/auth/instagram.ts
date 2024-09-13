@@ -23,7 +23,7 @@ export default async (profile: Profile) => {
     }
 
 
-    const browser = await launcher(profile.fullpath, true);
+    const browser = await launcher(profile.fullpath);
     const [page] = await browser.pages();
     console.log(chalk.blue(`Membuka link login Instagram...`));
     await page.goto(`https://www.instagram.com/accounts/login/`, {waitUntil: 'networkidle0'}).catch(panic);

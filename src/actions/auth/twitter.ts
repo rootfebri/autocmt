@@ -1,7 +1,7 @@
 import Profile from "../../../models/profile";
 import {expand, input} from "@inquirer/prompts";
 import {inqTheme, panic, validateEmailPhoneUsername} from "../../helpers/lib";
-import chromeLaunch from "../launcher";
+import launcher from "../launcher";
 import chalk from "chalk";
 import delay from "delay";
 import {ElementHandle} from "puppeteer";
@@ -35,7 +35,7 @@ export default async (profile: Profile) => {
         required: true,
     });
 
-    const browser = await chromeLaunch(profile.fullpath);
+    const browser = await launcher(profile.fullpath);
     const [page] = await browser.pages();
 
     try {

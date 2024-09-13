@@ -1,8 +1,29 @@
 import Profile from '../../models/profile';
+import chalk from "chalk";
 
-export default async function () {
+export default async () => {
     const profiles = await Profile.findAll()
-    profiles.forEach(profile => {
-        console.log(`[${profile.id}] '${profile.name}' \t| \tFB: ${profile.facebook ? '✅' : '❌'} \t|\t TW: ${profile.instagram ? '✅' : '❌'} \t|\t IG: ${profile.twitter ? '✅' : '❌'}\t`);
-    })
+    fmtDisplay(profiles)
+}
+
+interface FMTProfile {
+    name: string;
+    facebook: '✅' | '❌';
+    instagram: '✅' | '❌';
+    twitter: '✅' | '❌';
+    fullpath: string;
+}
+
+const toTable = (profile: Profile): FMTProfile => {
+    return {
+        name: chalk.cyan(profile.name),
+        facebook: profile.facebook ? '✅' : '❌',
+        instagram: profile.instagram ? '✅' : '❌',
+        twitter: profile.twitter ? '✅' : '❌',
+        fullpath: chalk.yellow(profile.fullpath),
+    };
+}
+
+const fmtDisplay = (profiles: Profile[]) => {
+    console.table(profiles.map(toTable));
 }

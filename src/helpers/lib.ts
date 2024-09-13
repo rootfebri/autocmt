@@ -3,28 +3,10 @@ import fs from "fs";
 import Profile from "../../models/profile";
 import {FProfile} from "./libs";
 import chalk from "chalk";
+import os from "os";
 
 export const CHROME_DIR: string = path.join(__dirname, `../chrome/userData`)
-
-export interface IProfile {
-    name: string
-    fullpath: string
-}
-
-export const getProfiles = (): IProfile[] => {
-    try {
-        const filenames = fs.readdirSync(CHROME_DIR).filter((file) => fs.statSync(path.join(CHROME_DIR, file)).isDirectory());
-        return filenames.map(filename => {
-            return {
-                name: filename,
-                fullpath: path.join(CHROME_DIR, filename)
-            }
-        })
-    } catch (error) {
-        console.error(`Folder ${CHROME_DIR} error/tidak ditemukan`);
-        return [];
-    }
-};
+export const docPath = path.join(os.homedir(), 'Documents');
 
 export const getRandomComment = (file: string): Promise<string> => {
     return new Promise((resolve, reject) => {
@@ -93,3 +75,6 @@ export const validateEmailPhoneUsername = (input: string) => {
     }
 }
 
+export const userBasePath = () => {
+    return fs.existsSync(docPath) ? path.normalize(docPath) : path.normalize(os.homedir());
+}

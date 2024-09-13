@@ -1,9 +1,9 @@
-import chromeLaunch from "../launcher";
 import Profile from "../../../models/profile";
 import {expand, input} from "@inquirer/prompts";
 import chalk from "chalk";
 import {inqTheme, panic} from "../../helpers/lib";
 import delay from "delay";
+import launcher from "../launcher";
 
 export default async (profile: Profile) => {
     if (profile.facebook) {
@@ -33,7 +33,7 @@ export default async (profile: Profile) => {
         required: true,
     })
 
-    const browser = await chromeLaunch(profile.fullpath);
+    const browser = await launcher(profile.fullpath);
     const [page] = await browser.pages();
     console.error(`Lakukan login ke Facebook pada browser.`);
 

@@ -2,7 +2,7 @@ import Profile from "../../models/profile";
 import {input} from "@inquirer/prompts";
 import {CHROME_DIR} from "../helpers/lib";
 import path from "path";
-import chromeLaunch from "./launcher";
+import launcher from "./launcher";
 import delay from "delay";
 
 export default async () => {
@@ -22,7 +22,7 @@ export default async () => {
             fullpath: path.join(CHROME_DIR, profileName),
         });
 
-        const browser = await chromeLaunch(profile.fullpath, true);
+        const browser = await launcher(profile.fullpath, true);
         await delay(2000)
         await browser.close()
 

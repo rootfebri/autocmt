@@ -1,36 +1,37 @@
 import path from "path";
 import {checkbox} from '@inquirer/prompts';
 import fs from "fs";
-import {getProfiles, selectRandom} from "../helpers/lib";
-import chromeLaunch from "../actions/launcher";
+import {selectRandom} from "../helpers/lib";
+import launcher from "../actions/launcher";
 import delay from "delay";
+import Profile from "../../models/profile";
+import chalk from "chalk";
 
 const TWEETS_DIR = path.resolve(__dirname, `../../tweets`)
 const X_HOME = `https://x.com/home`;
+
+const remapFiles = (file: string) => ({name: file, value: path.join(TWEETS_DIR, file)})
 
 export default async function () {
     const tweetFiles: string[] = fs.readdirSync(TWEETS_DIR).filter((file) => fs.statSync(path.join(TWEETS_DIR, file)).isFile());
     const files = await checkbox({
         message: 'Pilih file tweet',
-        choices: tweetFiles
-            .map(file => {
-                return {
-                    name: file,
-                    value: path.join(TWEETS_DIR, file),
-                }
-            })
-            .filter(file => file.value.includes('.txt')),
+        choices: tweetFiles.map(remapFiles).filter(file => file.value.includes('.txt')),
         required: true,
-        validate: choices => choices.length > 0
     });
 
-    const profiles = getProfiles()
+    const profiles = await Profile.findAll({where: {twitter: true}});
+    if (profiles.length === 0) {
+        console.log(chalk.red(`Tidak ada chrome yang memiliki akun Twitter`))
+        return;
+    }
+
     for (const profile of profiles) {
         try {
-            let tweet = fs.readFileSync(selectRandom(files), { encoding: 'utf-8' });
+            let tweet = fs.readFileSync(selectRandom(files), {encoding: 'utf-8'});
             tweet = tweet.slice(0, 280);
             console.log(`Memanggil chrome profil ${profile.name}...\r`)
-            const browser = await chromeLaunch(profile.fullpath);
+            const browser = await launcher(profile.fullpath, true);
             const [page] = await browser.pages();
             console.log(`Memanggil chrome profil ${profile.name}... berhasil\n`)
 
