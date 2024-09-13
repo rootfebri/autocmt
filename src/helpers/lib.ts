@@ -81,3 +81,8 @@ export const inqTheme = {
         defaultAnswer: chalk.white,
     },
 }
+
+export const panic = (e: any) => {
+    console.error(`Error: ${chalk.red(e.message || e)}`);
+    process.exit(1);
+}

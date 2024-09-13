@@ -13,9 +13,7 @@ export default async (profile: Profile) => {
                 {name: 'Ya', value: true, key: 'y'},
                 {name: 'Tidak', value: false, key: 'n'}
             ],
-            default: 'n',
             theme: inqTheme,
-            expanded: false,
         });
 
         if (!isContinue) return;
