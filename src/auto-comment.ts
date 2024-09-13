@@ -40,14 +40,14 @@ export default async function () {
             comment = _comment;
         }
 
-        console.log(`Memanggil chrome profil ${profile.name}...\r`)
+        console.log(`Memanggil chrome profil ${profile.name}...`)
         const browser = await chromeLaunch(profile.fullpath);
         const [page] = await browser.pages();
-        console.log(`Memanggil chrome profil ${profile.name}... berhasil\n`)
+        console.log(`Memanggil chrome profil ${profile.name}... berhasil`)
 
-        console.log(`Membuka link postingan...\r`)
+        console.log(`Membuka link postingan...`)
         await page.goto(linkPost, {waitUntil: 'networkidle0'});
-        console.log(`Membuka link postingan... berhasil\n`)
+        console.log(`Membuka link postingan... berhasil`)
         await delay(1500)
 
         if (await page.$('#login_popup_cta_form') !== null) {
@@ -74,6 +74,7 @@ export default async function () {
         await delay(5500);
         await browser.close();
         await delay(5500);
+        console.log(`Profil ${profile.name} selesai...`)
     }
 };
 

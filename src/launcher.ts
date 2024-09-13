@@ -32,8 +32,8 @@ export const chromeLaunch = async (profile: string): Promise<Browser> => {
             '--disable-setuid-sandbox',
             '--disable-accelerated-2d-canvas',
             '--disable-dev-shm-usage',
-            "--proxy-server='direct://'",
-            "--proxy-bypass-list=*"
+            // "--proxy-server=http://127.0.0.1:40000",
+            // "--proxy-bypass-list=*"
         ]
     });
 }
