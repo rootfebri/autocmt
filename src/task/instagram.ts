@@ -1,6 +1,6 @@
 import {input, select} from "@inquirer/prompts";
-import {getProfiles, getRandomComment} from "./lib";
-import {chromeLaunch} from "./launcher";
+import {getProfiles, getRandomComment} from "../helpers/lib";
+import chromeLaunch from "../actions/launcher";
 import delay from "delay";
 import fileSelector from 'inquirer-file-selector'
 import * as os from "os";

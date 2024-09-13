@@ -1,11 +1,11 @@
 import path from "path";
 import {checkbox} from '@inquirer/prompts';
 import fs from "fs";
-import {getProfiles, selectRandom} from "./lib";
-import {chromeLaunch} from "./launcher";
+import {getProfiles, selectRandom} from "../helpers/lib";
+import chromeLaunch from "../actions/launcher";
 import delay from "delay";
 
-const TWEETS_DIR = path.resolve(__dirname, `../tweets`)
+const TWEETS_DIR = path.resolve(__dirname, `../../tweets`)
 const X_HOME = `https://x.com/home`;
 
 export default async function () {

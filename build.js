@@ -2,7 +2,7 @@
 const { build } = require('esbuild');
 
 build({
-    entryPoints: ['src/index.ts'], // Entry point of your CLI
+    entryPoints: ['src/main.ts'], // Entry point of your CLI
     bundle: true,
     platform: 'node', // Target platform is Node.js
     target: 'node16', // Target Node.js version

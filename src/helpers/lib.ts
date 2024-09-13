@@ -1,5 +1,10 @@
 import path from "path";
 import fs from "fs";
+import Profile from "../../models/profile";
+import {FProfile} from "./libs";
+import type { PartialDeep } from '@inquirer/type';
+import { type Theme } from '@inquirer/core';
+import chalk from "chalk";
 
 export const CHROME_DIR: string = path.join(__dirname, `../chrome/userData`)
 
@@ -45,4 +50,34 @@ export const getRandomComment = (file: string): Promise<string> => {
 
 export const selectRandom = (input: string[]): string => {
     return input[Math.floor(Math.random() * input.length)];
+}
+
+export const renderMediaLists = (profile: Profile): string => {
+    const twitter = `[ TW: ${!profile.twitter ? '×' : '○'} ]`;
+    const facebook = `[ FB: ${!profile.facebook ? '×' : '○'} ]`;
+    const instagram = `[ IG: ${!profile.instagram ? '×' : '○'} ]`;
+    return `${twitter} ${facebook} ${instagram}`
+
+}
+
+export const fmtProfiles = (profiles: Profile[]) => profiles.map(fmtProfile);
+export const fmtProfile = (profile: Profile): FProfile => ({
+    name: `[${profile.id}] ${profile.name} | ${renderMediaLists(profile)}`,
+    value: profile,
+});
+
+export const inqTheme = {
+    spinner: {
+        interval: 200,
+        frames: ['-', '\\', '|', '/'],
+    },
+    style: {
+        answer: chalk.green,
+        key: chalk.cyan,
+        message: chalk.white,
+        error: chalk.red,
+        help: chalk.gray,
+        highlight: chalk.cyan,
+        defaultAnswer: chalk.white,
+    },
 }

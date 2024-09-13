@@ -12,3 +12,4 @@ yarn-error.log*
 chrome
 .idea
 *.zip
+dist
