@@ -4,7 +4,7 @@ import {chromeLaunch} from "./launcher";
 import delay from "delay";
 import fileSelector from 'inquirer-file-selector'
 import * as os from "os";
-import fs from "fs";
+import * as fs from "fs";
 
 export default async function () {
     const linkPost = await input({
@@ -64,8 +64,10 @@ export default async function () {
             await commentInput?.focus();
             await commentInput?.type(comment, {delay: 150});
 
-            await delay(1500);
+            await delay(1000);
             await commentInput?.press('Enter');
+            await delay(5000)
+
             await commentInput?.dispose();
         } catch (e: any) {
             console.error(`Gagal memberikan komentar pada profil \`${profile}\``, `\`${e.message}\``)
