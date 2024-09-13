@@ -2,7 +2,7 @@ import chromeLaunch from "../launcher";
 import Profile from "../../../models/profile";
 import {expand, input} from "@inquirer/prompts";
 import chalk from "chalk";
-import {inqTheme} from "../../helpers/lib";
+import {inqTheme, panic} from "../../helpers/lib";
 import delay from "delay";
 
 export default async (profile: Profile) => {
@@ -13,10 +13,10 @@ export default async (profile: Profile) => {
                 {name: 'Ya', value: true, key: 'y'},
                 {name: 'Tidak', value: false, key: 'n'}
             ],
-            theme: inqTheme,
         });
 
         if (!isContinue) return;
+        await Profile.update({facebook: false}, {where: {id: profile.id}});
     }
 
     const email = await input({
@@ -38,11 +38,7 @@ export default async (profile: Profile) => {
     console.error(`Lakukan login ke Facebook pada browser.`);
 
     try {
-        await page.goto('https://facebook.com')
-            .catch(reason => {
-                console.error(`Error: ${chalk.red(reason.message)}`);
-                process.exit(1);
-            });
+        await page.goto('https://facebook.com').catch(panic);
         const emailInput = await page.waitForSelector('#email');
         const passwordInput = await page.waitForSelector('#pass');
         await emailInput?.tap();

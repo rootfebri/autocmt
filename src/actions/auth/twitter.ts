@@ -1,20 +1,10 @@
 import Profile from "../../../models/profile";
 import {expand, input} from "@inquirer/prompts";
-import {inqTheme, panic} from "../../helpers/lib";
+import {inqTheme, panic, validateEmailPhoneUsername} from "../../helpers/lib";
 import chromeLaunch from "../launcher";
 import chalk from "chalk";
 import delay from "delay";
 import {ElementHandle} from "puppeteer";
-
-const validateTwitterIdentifier = (input: string) => {
-    if (input.includes('@')) {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input) || 'Masukkan alamat email yang valid.';
-    } else if (input.includes('+')) {
-        return /^\+\d{1,2}\s?\d{3,4}\s?\d{3,4}\s?\d{4}$/.test(input) || 'Masukkan nomor telepon yang valid.';
-    } else {
-        return !input.includes(' ') && !input.includes('@') && !input.includes('+') || 'Masukkan alamat email, nomor telepon, atau username Twitter yang valid.';
-    }
-}
 
 export default async (profile: Profile) => {
     if (profile.twitter) {
@@ -28,12 +18,13 @@ export default async (profile: Profile) => {
         });
 
         if (!isContinue) return;
+        await Profile.update({twitter: false}, {where: {id: profile.id}});
     }
 
     const identifier = await input({
         message: 'Masukkan alamat [email | username | nomor] Twitter:',
         theme: inqTheme,
-        validate: validateTwitterIdentifier,
+        validate: validateEmailPhoneUsername,
         required: true,
     });
 
@@ -67,7 +58,7 @@ export default async (profile: Profile) => {
         await delay(5000)
         let needUsernameOrPhone = await page.$('input[data-testid="ocfEnterTextTextInput"]')
         while (needUsernameOrPhone) {
-            const additional = await input({message: chalk.yellow('Masukkan [username | nomor] Twitter:'), validate: validateTwitterIdentifier, required: true});
+            const additional = await input({message: chalk.yellow('Masukkan [username | nomor] Twitter:'), validate: validateEmailPhoneUsername, required: true});
             await needUsernameOrPhone.tap()
             await needUsernameOrPhone.focus()
             await needUsernameOrPhone.type(additional, {delay: 100});
@@ -96,8 +87,8 @@ export default async (profile: Profile) => {
                 console.log(chalk.yellow('Password form tidak ditemukan, lakukan login manual.'));
                 const askAgain = await expand({message: 'Login berhasil?', choices: [{name: 'Ya', value: true, key: 'y'}, {name: 'Tidak', value: false, key: 'n'}], theme: inqTheme, default: 'y'});
                 if (askAgain) {
-                    console.log(chalk.green(`Login ke Facebook berhasil. 🥳🎉`));
-                    await Profile.update({facebook: true}, {where: {id: profile.id}})
+                    console.log(chalk.green(`Login ke Twitter berhasil. 🥳🎉`));
+                    await Profile.update({twitter: true}, {where: {id: profile.id}})
                 }
             } else {
                 await passwordInput.tap();
@@ -111,8 +102,8 @@ export default async (profile: Profile) => {
                 } else {
                     const askAgain = await expand({message: 'Login berhasil?', choices: [{name: 'Ya', value: true, key: 'y'}, {name: 'Tidak', value: false, key: 'n'}], theme: inqTheme, default: 'y'});
                     if (askAgain) {
-                        console.log(chalk.green(`Login ke Facebook berhasil. 🥳🎉`));
-                        await Profile.update({facebook: true}, {where: {id: profile.id}})
+                        console.log(chalk.green(`Login ke Twitter berhasil. 🥳🎉`));
+                        await Profile.update({twitter: true}, {where: {id: profile.id}})
                     }
                 }
             }

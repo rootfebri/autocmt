@@ -3,6 +3,7 @@ import Profile from "../../models/profile";
 import facebook from "./auth/facebook";
 import {fmtProfiles} from "../helpers/lib";
 import twitter from "./auth/twitter";
+import instagram from "./auth/instagram";
 
 export default async function () {
     const profiles = await Profile.findAll().then(fmtProfiles);
@@ -20,7 +21,7 @@ export default async function () {
         choices: [
             {name: 'Facebook', value: facebook},
             {name: 'Twitter', value: twitter},
-            {name: 'Instagram', value: twitter},
+            {name: 'Instagram', value: instagram},
         ],
         required: true,
         validate: (answers) => answers.length > 0 || 'Harus memilih salah satu.',

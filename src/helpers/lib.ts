@@ -6,12 +6,6 @@ import chalk from "chalk";
 
 export const CHROME_DIR: string = path.join(__dirname, `../chrome/userData`)
 
-export const isProfileExists = (input: string): boolean => {
-    const p = path.normalize(path.join(CHROME_DIR, input))
-
-    return fs.existsSync(p)
-}
-
 export interface IProfile {
     name: string
     fullpath: string
@@ -84,3 +78,18 @@ export const panic = (e: any) => {
     console.error(`Error: ${chalk.red(e.message || e)}`);
     process.exit(1);
 }
+
+export const doNotPanic = (e: any) => {
+    console.error(`Error: ${chalk.red(e.message || e)}`);
+}
+
+export const validateEmailPhoneUsername = (input: string) => {
+    if (input.includes('@')) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input) || 'Masukkan alamat email yang valid.';
+    } else if (input.includes('+')) {
+        return /^\+\d{1,2}\s?\d{3,4}\s?\d{3,4}\s?\d{4}$/.test(input) || 'Masukkan nomor telepon yang valid.';
+    } else {
+        return !input.includes(' ') && !input.includes('@') && !input.includes('+') || 'Masukkan alamat email, nomor telepon, atau username Twitter yang valid.';
+    }
+}
+
