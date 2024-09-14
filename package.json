@@ -5,7 +5,10 @@
     "main": "dist/index.js",
     "scripts": {
         "start": "bun run src/start.ts",
-        "migrate": "tsc && sequelize-cli db:migrate --migrations-path dist/migrations"
+        "migrate": "tsc && sequelize-cli db:migrate --migrations-path dist/migrations",
+        "migrate:fresh": "tsc && sequelize-cli db:migrate:undo:all --migrations-path dist/migrations && sequelize-cli db:migrate --migrations-path dist/migrations",
+        "migrate:wipe": "tsc && sequelize-cli db:migrate:undo:all --migrations-path dist/migrations"
+
     },
     "dependencies": {
         "@inquirer/prompts": "^5.5.0",
