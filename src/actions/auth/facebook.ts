@@ -1,9 +1,9 @@
-import Profile from "../../../models/profile";
+import Profile from "../../../models/profile.ts";
 import {expand, input} from "@inquirer/prompts";
 import chalk from "chalk";
-import {inqTheme, panic} from "../../helpers/lib";
+import {inqTheme, panic} from "~/helpers/lib.ts";
 import delay from "delay";
-import launcher from "../launcher";
+import launcher from "../launcher.ts";
 
 export default async (profile: Profile) => {
     if (profile.facebook) {

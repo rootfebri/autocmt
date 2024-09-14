@@ -13,3 +13,4 @@ chrome
 .idea
 *.zip
 dist
+*.sqlite*

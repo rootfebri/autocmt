@@ -1,8 +1,8 @@
-import Profile from "../../models/profile";
+import Profile from "../../models/profile.ts";
 import {input} from "@inquirer/prompts";
-import {CHROME_DIR} from "../helpers/lib";
+import {CHROME_DIR} from "../helpers/lib.ts";
 import path from "path";
-import launcher from "./launcher";
+import launcher from "./launcher.ts";
 import delay from "delay";
 
 export default async () => {

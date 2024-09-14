@@ -1,7 +1,7 @@
-import Profile from "../../../models/profile";
+import Profile from "../../../models/profile.ts";
 import {expand, input} from "@inquirer/prompts";
-import {inqTheme, panic, validateEmailPhoneUsername} from "../../helpers/lib";
-import launcher from "../launcher";
+import {inqTheme, panic, validateEmailPhoneUsername} from "~/helpers/lib.ts";
+import launcher from "../launcher.ts";
 import chalk from "chalk";
 import delay from "delay";
 import {ElementHandle} from "puppeteer";
@@ -44,6 +44,7 @@ export default async (profile: Profile) => {
         console.log(chalk.green(`Link terbuka`));
 
         console.log(chalk.blue(`Mengisi form login Twitter...`));
+        // @ts-ignore
         let emailInput: ElementHandle<HTMLInputElement> | null = null;
         try {
             emailInput = await page.waitForSelector('input[autocapitalize="sentences"][autocomplete="username"][autocorrect="on"][name="text"][spellcheck="true"][type="text"]');
@@ -79,6 +80,7 @@ export default async (profile: Profile) => {
             console.log(chalk.cyan('Captcha tidak ditemukan, melanjutkan ke password form.'));
         }
 
+        // @ts-ignore
         let passwordInput: ElementHandle<HTMLInputElement> | null = null;
         try {
             console.log(chalk.blue(`Mencari form password Twitter...`));

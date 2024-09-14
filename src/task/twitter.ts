@@ -1,13 +1,12 @@
 import path from "path";
 import {checkbox} from '@inquirer/prompts';
 import fs from "fs";
-import {selectRandom} from "../helpers/lib";
-import launcher from "../actions/launcher";
+import {selectRandom, TWEETS_DIR} from "../helpers/lib.ts";
+import launcher from "../actions/launcher.ts";
 import delay from "delay";
-import Profile from "../../models/profile";
+import Profile from "../../models/profile.ts";
 import chalk from "chalk";
 
-const TWEETS_DIR = path.resolve(__dirname, `../../tweets`)
 const X_HOME = `https://x.com/home`;
 
 const remapFiles = (file: string) => ({name: file, value: path.join(TWEETS_DIR, file)})

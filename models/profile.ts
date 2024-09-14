@@ -1,5 +1,5 @@
 import {DataTypes, Model} from "sequelize";
-import {sequelize} from "./index";
+import {sequelize} from "./index.ts";
 
 class Profile extends Model {
     declare id: number;

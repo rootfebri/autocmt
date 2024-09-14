@@ -1,7 +1,7 @@
 import {checkbox} from "@inquirer/prompts";
 import fs from "fs";
-import Profile from "../../models/profile";
-import {fmtProfiles, inqTheme} from "../helpers/lib";
+import Profile from "../../models/profile.ts";
+import {fmtProfiles, inqTheme} from "../helpers/lib.ts";
 import chalk from "chalk";
 
 export default async function () {

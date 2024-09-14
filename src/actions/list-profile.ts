@@ -1,4 +1,4 @@
-import Profile from '../../models/profile';
+import Profile from '../../models/profile.ts';
 import chalk from "chalk";
 
 export default async () => {

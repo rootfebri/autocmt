@@ -1,10 +1,10 @@
 import {input, select} from "@inquirer/prompts";
-import {doNotPanic, getRandomComment, panic, userBasePath} from "../helpers/lib";
-import launcher from "../actions/launcher";
+import {doNotPanic, getRandomComment, panic, userBasePath} from "../helpers/lib.ts";
+import launcher from "../actions/launcher.ts";
 import delay from "delay";
 import fileSelector from 'inquirer-file-selector'
 import fs from "fs";
-import Profile from "../../models/profile";
+import Profile from "../../models/profile.ts";
 import chalk from "chalk";
 
 export default async function () {

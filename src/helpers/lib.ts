@@ -1,12 +1,19 @@
 import path from "path";
 import fs from "fs";
-import Profile from "../../models/profile";
-import {FProfile} from "./libs";
+import Profile from "../../models/profile.ts";
 import chalk from "chalk";
-import os from "os";
+import os from "node:os";
+import process from "node:process";
 
-export const CHROME_DIR: string = path.join(__dirname, `../chrome/userData`)
-export const docPath = path.join(os.homedir(), 'Documents');
+type FProfile = {
+    name: string
+    value: Profile
+}
+
+export const BASE_DIR: string = process.cwd()
+export const CHROME_DIR: string = path.join(BASE_DIR, `src/chrome/userData`)
+export const DOC_PATH: string = fs.existsSync(path.join(os.homedir(), 'Documents')) ? path.join(os.homedir(), 'Documents') : os.homedir();
+export const TWEETS_DIR: string = path.join(BASE_DIR, `tweets`)
 
 export const getRandomComment = (file: string): Promise<string> => {
     return new Promise((resolve, reject) => {
@@ -35,6 +42,7 @@ export const renderMediaLists = (profile: Profile): string => {
 }
 
 export const fmtProfiles = (profiles: Profile[]) => profiles.map(fmtProfile);
+
 export const fmtProfile = (profile: Profile): FProfile => ({
     name: `[${profile.id}] ${profile.name} | ${renderMediaLists(profile)}`,
     value: profile,
@@ -76,5 +84,5 @@ export const validateEmailPhoneUsername = (input: string) => {
 }
 
 export const userBasePath = () => {
-    return fs.existsSync(docPath) ? path.normalize(docPath) : path.normalize(os.homedir());
+    return fs.existsSync(DOC_PATH) ? path.normalize(DOC_PATH) : path.normalize(os.homedir());
 }

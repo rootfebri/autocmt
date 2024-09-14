@@ -1,23 +1,27 @@
 import {select} from "@inquirer/prompts";
-import setupLogin from "./actions/setup";
-import deleteProfile from "./actions/delete-profile";
+import setupLogin from "./actions/setup.ts";
+import deleteProfile from "./actions/delete-profile.ts";
 import fs from "fs";
-import {CHROME_DIR} from "./helpers/lib";
-import listProfile from "./actions/list-profile";
-import twitter from "./task/twitter";
-import instagram from "./task/instagram";
-import facebook from "./task/facebook";
-import createProfile from "./actions/create-profile";
-import openProfile from "./actions/open-profile";
+import {CHROME_DIR, TWEETS_DIR} from "./helpers/lib.ts";
+import listProfile from "./actions/list-profile.ts";
+import twitter from "./task/twitter.ts";
+import instagram from "./task/instagram.ts";
+import facebook from "./task/facebook.ts";
+import createProfile from "./actions/create-profile.ts";
+import openProfile from "./actions/open-profile.ts";
+import process from "node:process";
 
-const ensureChrome = () => {
+const ensureRequiredDir = () => {
     if (!fs.existsSync(CHROME_DIR)) {
         fs.mkdirSync(CHROME_DIR, {recursive: true})
     }
+    if (!fs.existsSync(TWEETS_DIR)) {
+        fs.mkdirSync(TWEETS_DIR, {recursive: true})
+    }
 }
 
-export default async () => {
-    ensureChrome();
+const main = async () => {
+    ensureRequiredDir();
 
     try {
         const answer = await select({
@@ -68,10 +72,13 @@ export default async () => {
 
         const answer2 = await answer();
         await answer2();
-    } catch (error) {
-        console.error("An error occurred in main:", error);
+    } catch (error: any) {
+        console.error("An error occurred in main:", error.message);
     } finally {
         process.exit(0);
     }
 }
 
+(async () => {
+    await main()
+})()

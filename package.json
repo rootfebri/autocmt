@@ -4,11 +4,10 @@
     "description": "",
     "main": "dist/index.js",
     "scripts": {
-        "start": "bun run src/start.ts",
+        "start": "bun run src/main.ts",
         "migrate": "tsc && sequelize-cli db:migrate --migrations-path dist/migrations",
         "migrate:fresh": "tsc && sequelize-cli db:migrate:undo:all --migrations-path dist/migrations && sequelize-cli db:migrate --migrations-path dist/migrations",
         "migrate:wipe": "tsc && sequelize-cli db:migrate:undo:all --migrations-path dist/migrations"
-
     },
     "dependencies": {
         "@inquirer/prompts": "^5.5.0",
@@ -40,6 +39,7 @@
         "sqlite3": "^5.1.7"
     },
     "devDependencies": {
+        "@types/puppeteer": "^7.0.4",
         "esbuild": "^0.23.1",
         "typescript": "^5.5.3"
     },

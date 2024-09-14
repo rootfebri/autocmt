@@ -1,9 +1,9 @@
 import {checkbox, select} from "@inquirer/prompts";
-import Profile from "../../models/profile";
-import facebook from "./auth/facebook";
-import {fmtProfiles} from "../helpers/lib";
-import twitter from "./auth/twitter";
-import instagram from "./auth/instagram";
+import Profile from "../../models/profile.ts";
+import facebook from "./auth/facebook.ts";
+import {fmtProfiles} from "../helpers/lib.ts";
+import twitter from "./auth/twitter.ts";
+import instagram from "./auth/instagram.ts";
 
 export default async function () {
     const profiles = await Profile.findAll().then(fmtProfiles);
