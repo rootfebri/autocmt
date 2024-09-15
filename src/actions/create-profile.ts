@@ -9,10 +9,7 @@ export default async () => {
     const profileName = await input({
         required: true,
         message: 'Masukkan nama profile chrome',
-        validate: async value => {
-            const profile = await Profile.findOne({where: {name: value, fullpath: path.join(CHROME_DIR, value)}})
-            return profile === null
-        },
+        validate: async value => await Profile.findOne({where: {name: value, fullpath: path.join(CHROME_DIR, value)}}) === null,
         transformer: value => path.join(CHROME_DIR, value).replace(/\\/g, '/'),
     });
 
@@ -22,7 +19,7 @@ export default async () => {
             fullpath: path.join(CHROME_DIR, profileName),
         });
 
-        const browser = await launcher(profile.fullpath, true);
+        const browser = await launcher(profile.name, true);
         await delay(2000)
         await browser.close()
 

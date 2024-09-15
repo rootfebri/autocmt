@@ -10,6 +10,7 @@ import facebook from "./task/facebook.ts";
 import createProfile from "./actions/create-profile.ts";
 import openProfile from "./actions/open-profile.ts";
 import process from "node:process";
+import {sequelize} from "../models";
 
 const ensureRequiredDir = () => {
     if (!fs.existsSync(CHROME_DIR)) {
@@ -80,5 +81,10 @@ const main = async () => {
 }
 
 (async () => {
+    await sequelize.authenticate({
+        logging: false,
+        benchmark: false,
+        nest: false,
+    })
     await main()
 })()

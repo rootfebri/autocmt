@@ -1,16 +1,17 @@
 import {Browser, executablePath} from "puppeteer";
 import StealthPlugin from "puppeteer-extra-plugin-stealth";
 import puppeteer from "puppeteer-extra";
-import fs from "fs";
-import path, {dirname} from "path";
-import {CHROME_DIR} from "../helpers/lib.ts";
 import process from "node:process";
 
 export default async (profile: string, headless: boolean = false): Promise<Browser> => {
-    headless = process.argv.includes('--headless') || headless || false;
-    if (!fs.existsSync(profile)) {
-        profile = path.join(CHROME_DIR, dirname(profile))
+    if (process.argv.includes('--headless')) {
+        headless = !!process.argv.find((value, index, args) => {
+            if (value === '--headless' && typeof args[index + 1] === 'boolean') {
+                return args[index + 1] as unknown as boolean;
+            }
+        });
     }
+
     const stealth = StealthPlugin();
     stealth.enabledEvasions.delete('iframe.contentWindow')
     // @ts-ignore
