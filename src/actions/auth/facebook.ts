@@ -1,5 +1,5 @@
 import Profile from "../../../models/profile.ts";
-import {expand, input} from "@inquirer/prompts";
+import {confirm, expand, input} from "@inquirer/prompts";
 import chalk from "chalk";
 import {inqTheme, panic} from "~/helpers/lib.ts";
 import delay from "delay";
@@ -65,6 +65,7 @@ export default async (profile: Profile) => {
             console.log(chalk.green(`Login ke Facebook berhasil. 🥳🎉`));
             await Profile.update({facebook: true}, {where: {id: profile.id}})
         }
+        await confirm({message: 'Sudah selesai?'})
     } catch (e: any) {
         console.log(`Error: ${chalk.red(e.message)}`);
     }
