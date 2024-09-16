@@ -22,7 +22,7 @@ export default async (profile: Profile) => {
     const email = await input({
         message: 'Masukkan alamat email Facebook:',
         theme: inqTheme,
-        validate: (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) || 'Masukkan alamat email yang valid.',
+        // validate: (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) || 'Masukkan alamat email yang valid.',
         required: true,
     });
 
