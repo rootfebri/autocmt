@@ -1,5 +1,5 @@
 import Profile from "../../models/profile.ts";
-import {input, select} from "@inquirer/prompts";
+import {confirm, input, select} from "@inquirer/prompts";
 import {CHROME_DIR} from "../helpers/lib.ts";
 import path from "path";
 import launcher from "./launcher.ts";
@@ -65,6 +65,7 @@ const Otomatis = async () => {
             const browser = await launcher(profile.name, true);
             await delay(2000)
             await browser.close()
+            await confirm({message: `Udah mbot?`})
             console.info(`[${profile.id}] Profile '${profile.name}' Berhasil dibuat!`)
             created++;
         }
