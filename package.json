@@ -2,7 +2,7 @@
     "name": "autocmt",
     "version": "1.0.0",
     "description": "",
-    "main": "dist/index.js",
+    "main": "dist/src/main.ts",
     "scripts": {
         "start": "bun run src/main.ts",
         "migrate": "tsc && sequelize-cli db:migrate --migrations-path dist/migrations",
