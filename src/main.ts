@@ -76,7 +76,7 @@ const main = async () => {
             const answer2 = await answer();
             await answer2();
         } catch (e: any) {
-            console.error("An error occurred in main thread:", e.message);
+            console.error("An error occurred in second thread:", e.message);
             if (!fs.existsSync(path.join(BASE_DIR, 'logs'))) {
                 fs.mkdirSync(path.join(BASE_DIR, 'logs'), {recursive: true})
             }
