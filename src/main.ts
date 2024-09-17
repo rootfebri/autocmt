@@ -22,8 +22,15 @@ const ensureRequiredDir = () => {
     }
 }
 
+const ensureLogger = () => {
+    if (!fs.existsSync(path.join(BASE_DIR, 'logs'))) {
+        fs.mkdirSync(path.join(BASE_DIR, 'logs'), {recursive: true})
+    }
+}
+
 const main = async () => {
     ensureRequiredDir();
+    ensureLogger();
 
     try {
         const answer = await select({
@@ -77,14 +84,13 @@ const main = async () => {
             await answer2();
         } catch (e: any) {
             console.error("An error occurred in second thread:", e.message);
-            if (!fs.existsSync(path.join(BASE_DIR, 'logs'))) {
-                fs.mkdirSync(path.join(BASE_DIR, 'logs'), {recursive: true})
-            }
             const logFile = path.join(BASE_DIR, 'logs', 'error.log');
             fs.appendFileSync(logFile, `${e}\n`);
         }
-    } catch (error: any) {
-        console.error("An error occurred in main thread:", error.message);
+    } catch (e: any) {
+        console.error("An error occurred in main thread:", e.message);
+        const logFile = path.join(BASE_DIR, 'logs', 'error.log');
+        fs.appendFileSync(logFile, `${e}\n`);
     } finally {
         process.exit(0);
     }
