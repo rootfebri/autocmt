@@ -29,7 +29,7 @@ export default async function () {
                 })
             },
             {
-                name: 'Dari file .txt', value: () => fileSelector({
+                name: 'Dari file .txt (Dipisah perbaris)', value: () => fileSelector({
                     message: 'Pilih file komentar:',
                     basePath: userBasePath(),
                     match: file => !file.isDir && file.name.includes('.txt')
