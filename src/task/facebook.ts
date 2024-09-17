@@ -1,12 +1,12 @@
 import {input, select} from "@inquirer/prompts";
-import {doNotPanic, getRandomComment, userBasePath} from "../helpers/lib.ts";
+import {getRandomComment, userBasePath} from "../helpers/lib.ts";
 import launcher from "../actions/launcher.ts";
 import delay from "delay";
 import fileSelector from 'inquirer-file-selector'
 import * as fs from "fs";
 import Profile from "../../models/profile.ts";
 import chalk from "chalk";
-import { HTTPResponse } from "puppeteer";
+import {HTTPResponse} from "puppeteer";
 
 export default async function () {
     const profiles = await Profile.findAll({where: {facebook: true}});
@@ -76,14 +76,20 @@ export default async function () {
             continue;
         }
 
-        const commentInput = await page.$('div[data-lexical-editor="true"][role="textbox"][spellcheck="true"]').catch(doNotPanic);
-        await commentInput?.tap();
-        await commentInput?.focus();
-        await commentInput?.type(comment, {delay: 150});
-        await commentInput?.press('Enter', {delay: 150});
-        await delay(5000)
+        try {
+            const commentInput = await page.$('div[data-lexical-editor="true"][role="textbox"][spellcheck="true"]');
 
-        await commentInput?.dispose();
+            await commentInput?.tap();
+            await commentInput?.focus();
+            await commentInput?.type(comment, {delay: 150});
+            await commentInput?.press('Enter', {delay: 150});
+            await delay(5000)
+
+            await commentInput?.dispose();
+
+        } catch (e: any) {
+            console.log(chalk.red(`Error: ${chalk.red(e.message || e)}`));
+        }
 
         await delay(5500);
         await browser.close();
