@@ -6,6 +6,7 @@ import fileSelector from 'inquirer-file-selector'
 import * as fs from "fs";
 import Profile from "../../models/profile.ts";
 import chalk from "chalk";
+import { HTTPResponse } from "puppeteer";
 
 export default async function () {
     const profiles = await Profile.findAll({where: {facebook: true}});
@@ -53,8 +54,13 @@ export default async function () {
         }
 
         console.log(chalk.yellow(`Membuka link postingan...`))
-        const response = await page.goto(linkPost, {waitUntil: 'networkidle0'}).catch(doNotPanic);
-        if (response?.status() !== 200) {
+        let response: HTTPResponse | null = null;
+        try {
+            response = await page.goto(linkPost, {waitUntil: 'networkidle0'});
+        } catch (e: any) {
+            console.error(`Error: ${chalk.red(e.message || e)}`);
+        }
+        if (!response) {
             console.error(`Gagal membuka link postingan pada profil \`${profile}\``)
             await browser.close();
             await delay(5500);
