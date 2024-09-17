@@ -18,7 +18,6 @@ export default async function () {
     const linkPost = await input({
         message: 'Masukkan link postingan: ',
         validate: value => /^(https?:\/\/)?([\da-z.-]+\.)+[a-z]{2,}$/.test(value) || 'Link postingan harus valid',
-        transformer: value => value.replace('http://', 'https://'),
     });
 
     const commentOrFile = await select({
