@@ -44,10 +44,22 @@ export default async function () {
         console.log(chalk.yellow(`Membuka profile chrome ${profile.name}... `))
         const browser = await launcher(profile.fullpath, true);
         const [page] = await browser.pages();
-        console.log(chalk.cyan(`Membuka profile chrome ${profile.name}... Berhasil`))
+        page.on('dialog', async (dialog) => {
+            console.log('Dialog detected:', dialog.message());
+            if (dialog.type() === 'alert') {
+                console.log('Canceling alert dialog...');
+                try {
+                    await dialog.dismiss();
+                    console.log('Alert dialog canceled.');
+                } catch (e) {
+                    console.log('Alert dialog cancel has been failed.');
+                }
+            }
+        });
 
         let comment: string;
         if (fs.existsSync(_comment)) {
+            console.log(chalk.cyan(`Membuka profile chrome ${profile.name}... Berhasil`))
             comment = await getRandomComment(_comment);
         } else {
             comment = _comment;
