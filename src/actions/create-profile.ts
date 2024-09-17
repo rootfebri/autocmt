@@ -52,6 +52,10 @@ const Otomatis = async () => {
         validate: (value) => Number(value) > 0 || 'Jumlah profile harus lebih besar dari 0',
     });
     maxProfile = parseInt(maxProfile);
+    const autoClose = await confirm({
+        message: 'Apakah ingin menutup browser setelah membuat semua profile?',
+        default: true,
+    });
 
     let created = 0;
     for (let i = 0; i < maxProfile; i++) {
@@ -60,12 +64,14 @@ const Otomatis = async () => {
             const profile = await Profile.create({
                 name: profileName,
                 fullpath: path.join(CHROME_DIR, profileName),
-            })
+            });
 
-            const browser = await launcher(profile.name, true);
+            const browser = await launcher(profile.fullpath, true);
             await delay(2000)
+            if (!autoClose) {
+                await confirm({message: `Udah mbot?`});
+            }
             await browser.close()
-            await confirm({message: `Udah mbot?`})
             console.info(`[${profile.id}] Profile '${profile.name}' Berhasil dibuat!`)
             created++;
         }

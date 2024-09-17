@@ -14,3 +14,4 @@ chrome
 *.zip
 dist
 *.exe
+*.sqlite*

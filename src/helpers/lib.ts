@@ -10,7 +10,7 @@ type FProfile = {
     value: Profile
 }
 
-export const BASE_DIR: string = process.cwd()
+export const BASE_DIR: string = path.resolve(__dirname, '..', '..');
 export const CHROME_DIR: string = path.join(BASE_DIR, `src/chrome/userData`)
 export const DOC_PATH: string = fs.existsSync(path.join(os.homedir(), 'Documents')) ? path.join(os.homedir(), 'Documents') : os.homedir();
 export const TWEETS_DIR: string = path.join(BASE_DIR, `tweets`)

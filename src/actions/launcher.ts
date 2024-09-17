@@ -14,9 +14,7 @@ export default async (profile: string, headless: boolean = false): Promise<Brows
 
     const stealth = StealthPlugin();
     stealth.enabledEvasions.delete('iframe.contentWindow')
-    // @ts-ignore
     puppeteer.use(stealth)
-    // @ts-ignore
     puppeteer.use(require('puppeteer-extra-plugin-user-preferences')({
         userPrefs: {
             webkit: {
@@ -27,7 +25,6 @@ export default async (profile: string, headless: boolean = false): Promise<Brows
         }
     }));
 
-    // @ts-ignore
     return await puppeteer.launch({
         userDataDir: profile,
         headless: headless,
