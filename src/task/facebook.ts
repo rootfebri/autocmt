@@ -17,7 +17,7 @@ export default async function () {
 
     const linkPost = await input({
         message: 'Masukkan link postingan: ',
-        validate: value => value.includes('http') || 'Link postingan harus valid',
+        validate: value => value.includes('http') || value.includes('https') || 'Link postingan harus valid',
     });
 
     const commentOrFile = await select({
