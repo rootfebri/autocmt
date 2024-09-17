@@ -78,15 +78,12 @@ export default async function () {
 
         try {
             const commentInput = await page.$('div[data-lexical-editor="true"][role="textbox"][spellcheck="true"]');
-
             await commentInput?.tap();
             await commentInput?.focus();
             await commentInput?.type(comment, {delay: 150});
             await commentInput?.press('Enter', {delay: 150});
             await delay(5000)
-
             await commentInput?.dispose();
-
         } catch (e: any) {
             console.log(chalk.red(`Error: ${chalk.red(e.message || e)}`));
         }
