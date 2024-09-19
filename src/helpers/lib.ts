@@ -1,6 +1,6 @@
 import path from "path";
 import fs from "fs";
-import Profile from "../../models/profile.ts";
+import Profile from "../../models/profile";
 import chalk from "chalk";
 import os from "node:os";
 import process from "node:process";
@@ -14,6 +14,7 @@ export const BASE_DIR: string = path.resolve(__dirname, '..', '..');
 export const CHROME_DIR: string = path.join(BASE_DIR, `src/chrome/userData`)
 export const DOC_PATH: string = fs.existsSync(path.join(os.homedir(), 'Documents')) ? path.join(os.homedir(), 'Documents') : os.homedir();
 export const TWEETS_DIR: string = path.join(BASE_DIR, `tweets`)
+export const TWEET_PHOTOS_DIR = path.join(TWEETS_DIR, 'photos');
 
 export const getRandomComment = (file: string): Promise<string> => {
     return new Promise((resolve, reject) => {

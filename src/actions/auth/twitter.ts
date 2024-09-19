@@ -1,7 +1,7 @@
-import Profile from "../../../models/profile.ts";
+import Profile from "../../../models/profile";
 import {expand, input} from "@inquirer/prompts";
-import {inqTheme, panic, validateEmailPhoneUsername} from "~/helpers/lib.ts";
-import launcher from "../launcher.ts";
+import {inqTheme, panic, validateEmailPhoneUsername} from "~/helpers/lib";
+import launcher from "../launcher";
 import chalk from "chalk";
 import delay from "delay";
 import {ElementHandle} from "puppeteer";

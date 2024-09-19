@@ -1,7 +1,7 @@
 import {confirm, select} from "@inquirer/prompts";
-import Profile from "../../models/profile.ts";
-import {doNotPanic, fmtProfiles, panic} from "../helpers/lib.ts";
-import launcher from "./launcher.ts";
+import Profile from "../../models/profile";
+import {doNotPanic, fmtProfiles, panic} from "../helpers/lib";
+import launcher from "./launcher";
 
 export default async function () {
     const choices = await Profile.findAll().then(fmtProfiles).catch(panic);

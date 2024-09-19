@@ -1,10 +1,10 @@
 import {input, select} from "@inquirer/prompts";
-import {getRandomComment, userBasePath} from "../helpers/lib.ts";
-import launcher from "../actions/launcher.ts";
+import {getRandomComment, userBasePath} from "../helpers/lib";
+import launcher from "../actions/launcher";
 import delay from "delay";
 import fileSelector from 'inquirer-file-selector'
 import * as fs from "fs";
-import Profile from "../../models/profile.ts";
+import Profile from "../../models/profile";
 import chalk from "chalk";
 import {HTTPResponse} from "puppeteer";
 

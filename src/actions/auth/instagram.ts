@@ -1,8 +1,8 @@
-import Profile from "../../../models/profile.ts";
+import Profile from "../../../models/profile";
 import {confirm, expand, input} from "@inquirer/prompts";
 import chalk from "chalk";
-import {inqTheme, panic, validateEmailPhoneUsername} from "~/helpers/lib.ts";
-import launcher from "../launcher.ts";
+import {inqTheme, panic, validateEmailPhoneUsername} from "~/helpers/lib";
+import launcher from "../launcher";
 import delay from "delay";
 
 const LOGIN_FORM = `input[type="text"][name="username"]`;

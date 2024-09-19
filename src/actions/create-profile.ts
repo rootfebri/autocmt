@@ -1,9 +1,10 @@
-import Profile from "../../models/profile.ts";
+import Profile from "../../models/profile";
 import {confirm, input, select} from "@inquirer/prompts";
-import {CHROME_DIR} from "../helpers/lib.ts";
+import {CHROME_DIR} from "~/helpers/lib";
 import path from "path";
-import launcher from "./launcher.ts";
+import launcher from "./launcher";
 import delay from "delay";
+import chalk from "chalk";
 
 export default async () => {
     const create = await select({
@@ -30,7 +31,7 @@ const ManualProfile = async () => {
             fullpath: path.join(CHROME_DIR, profileName),
         });
 
-        const browser = await launcher(profile.name, true);
+        const browser = await launcher(profile.fullpath, true);
         await delay(2000)
         await browser.close()
 
@@ -65,6 +66,7 @@ const Otomatis = async () => {
                 name: profileName,
                 fullpath: path.join(CHROME_DIR, profileName),
             });
+            console.log(chalk.green(`${profile.toJSON()}`))
 
             const browser = await launcher(profile.fullpath, true);
             await delay(2000)
